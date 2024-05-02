@@ -3,8 +3,8 @@ pipeline {
     
     environment {
         DIRECTORY_PATH = "/Users/mohakahuja/.jenkins"
-        TESTING_ENVIRONMENT = "QA"
-        PRODUCTION_ENVIRONMENT = "SomanshAhuja"
+        TESTING_ENVIRONMENT = "AWS EC2 instance"
+        PRODUCTION_ENVIRONMENT = "AWS EC2 instance"
     }
     
     stages {
@@ -25,21 +25,40 @@ pipeline {
                 echo "Checking the quality of the code"
             }
         }
-        stage('Deploy') {
+        stage('Security Scan') {
+            steps {
+                echo "Scanning for the security of the application"
+            }
+        }
+        stage('Deploy to a staging/testing server') {
             steps {
                 echo "Deploying the application to testing environment: ${env.TESTING_ENVIRONMENT}"
             }
         }
-        stage('Approval') {
+        stage('Integration Tests after staging') {
             steps {
-                echo "Waiting for manual approval..."
-                sleep time: 10, unit: 'SECONDS'
+                echo "Running integration tests"
             }
         }
         stage('Deploy to Production') {
             steps {
                 echo "Deploying the application to production environment: ${env.PRODUCTION_ENVIRONMENT}"
             }
+        }
+        
+    }
+    post {
+        success {
+            // Send success email notification
+            emailext body: 'Pipeline ran successfully',
+                     subject: 'Pipeline Success',
+                     to: 'somanshahuja2000@gmail.com'
+        }
+        failure {
+            // Send failure email notification
+            emailext body: 'Pipeline failed',
+                     subject: 'Pipeline Failure',
+                     to: 'somanshahuja2000@gmail.com'
         }
     }
 }
