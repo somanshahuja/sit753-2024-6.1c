@@ -6,7 +6,7 @@ pipeline {
         TESTING_ENVIRONMENT = "AWS EC2 instance"
         PRODUCTION_ENVIRONMENT = "AWS EC2 instance"
     }
-    
+    //adding comments
     stages {
         stage('Build') {
             steps {
