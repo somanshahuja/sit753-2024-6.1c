@@ -50,13 +50,13 @@ pipeline {
     post {
         success {
             // Send success email notification
-            emailext body: 'Pipeline run successfully in Jenkins',
+            emailext body: 'Pipeline run successfully',
                      subject: 'Pipeline Success',
                      to: 'somanshahuja2000@gmail.com'
         }
         failure {
             // Send failure email notification
-            emailext body: 'Pipeline failed',
+            emailext body: 'Pipeline failed in jenkins',
                      subject: 'Pipeline Failure',
                      to: 'somanshahuja2000@gmail.com'
         }
