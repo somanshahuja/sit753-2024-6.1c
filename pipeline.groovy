@@ -56,7 +56,7 @@ pipeline {
         }
         failure {
             // Send failure email notification
-            emailext body: 'Pipeline failed in jenkins',
+            emailext body: 'Pipeline failed',
                      subject: 'Pipeline Failure',
                      to: 'somanshahuja2000@gmail.com'
         }
